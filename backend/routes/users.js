@@ -1,23 +1,42 @@
 import { Router } from 'express';
-import users from '../models/users.js';
+import bcrypt from 'bcrypt';
+import User from '../models/users.js';
 
 const router = new Router();
+const saltRounds = process.env.SALT_ROUNDS;
 
 router
+/**
+ * GET /
+ * @description returns all users
+ */
   .get( '/', async (req, res) => {
-    const getAllUsers = await users.find({});
+    const getAllUsers = await User.find({});
     console.log( 'getAllUsers --> ', getAllUsers );
     try {
-      res.send( 'testing users route' );
+      res.json( getAllUsers );
     } catch (error) {
       console.log( error );
+    }
+  })
+  /**
+   * GET /:id
+   * @description returns a user by id
+   */
+  .get( '/:id', async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      res.json(user).status(200);
+
+    } catch (error) {
+      res.json(error).status(404);
     }
   })
   .post( '/signin', async (req, res) => {
     let userFound = false;
     let passwordValidated = false;
 
-    const findUserByEmail = await users.findOne( { email: req.body.email } );
+    const findUserByEmail = await User.findOne( { email: req.body.email } );
 
     // check if user exist
     if ( findUserByEmail ) {
@@ -32,9 +51,43 @@ router
       console.log( 'found user and password was validate!' );
       res.json(findUserByEmail).status(200);
     } else {
-      res.json('User not found or was unable to authenticate').status(204);
+      res.json( {msg: 'User not found or was unable to authenticate'} ).status(204);
     }
 
   })
+  /**
+   * POST /
+   * @description creates a new user
+   */
+  .post( '/signup', async (req, res) => {
+
+    console.log( 'req.body --> ', req.body );
+
+    try {
+      // check email is not in db
+      const isEmailTaken = await User.findOne( { email: req.body.email } );
+
+      if ( !isEmailTaken ) {
+        try {
+          // create a new user in db
+          let newDocument = req.body;
+          let myDate = new Date();
+          newDocument.date_created = myDate.toString();
+
+          const user = await User.create(newDocument);
+
+          // send the new user
+          res.json(user);
+          
+        } catch (error) {
+          res.json(error);
+        }
+      } else {
+        res.json( {msg: 'Email already exists'} ).status(401);
+      }
+    } catch (error) {
+      res.json(error);
+    }
+  });
 
 export default router;
