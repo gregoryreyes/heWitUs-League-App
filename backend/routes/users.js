@@ -32,6 +32,30 @@ router
       res.json(error).status(404);
     }
   })
+  /**
+   * PUT /:ID
+   * @description edit user information by id
+   */
+  .put( '/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { body } = req;
+
+      if ( body.password ) {
+        delete body.password;
+        console.log( 'Password removed from body');
+      }
+
+      const updateUser = await User.findByIdAndUpdate( id, body, {new: true} );
+      res.json(updateUser);
+    } catch (error) {
+      res.json( {msg: 'User not found!'} );
+    }
+  })
+  /**
+   * POST /signin
+   * @description route to sign in to app
+   */
   .post( '/signin', async (req, res) => {
     let userFound = false;
     let passwordValidated = false;
