@@ -53,6 +53,18 @@ router
     }
   })
   /**
+   * DELETE /:id
+   */
+  .delete( '/:id', async (req, res) => {
+    const {id} = req.params;
+    try {
+      const deleteUser = await User.findByIdAndDelete(id);
+      res.json( {msg: "User deleted", deleteUser } );
+    } catch (error) {
+      console.log(error);
+    }
+  })
+  /**
    * POST /signin
    * @description route to sign in to app
    */
