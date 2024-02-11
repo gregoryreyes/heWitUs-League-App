@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import User from '../models/users.js';
+import UserProfile from '../models/userProfiles.js';
 
 const router = new Router();
 const saltRounds = Number( process.env.SALT_ROUNDS );
@@ -58,7 +59,10 @@ router
     const {id} = req.params;
     try {
       const deleteUser = await User.findByIdAndDelete(id);
-      res.json( {msg: "User deleted", deleteUser } );
+      const deleteUserProfile = await UserProfile.findOneAndDelete( { user_id: id } );
+      res.json( 
+        { deleteUser, deleteUserProfile }
+      );
     } catch (error) {
       console.log(error);
       res.json(error).status(400);
@@ -136,7 +140,7 @@ router
   })
   /**
    * POST /
-   * @description creates a new user
+   * @description creates a new user and a profile for the user
    */
   .post( '/signup', async (req, res) => {
 
@@ -154,9 +158,18 @@ router
           // newDocument.date_created = myDate.toString();
 
           const newUser = await User.create(newDocument);
+          
+          const newUserProfile = await UserProfile.create( { 
+            user_id: newUser._id ,
+            fname: req.body.fname,
+            lname: req.body.lname,
+            phone: req.body.phone,
+            bio: req.body.bio,
+            img_url: req.body.img_url
+          } );
 
           // send the new user
-          res.json(newUser).status(203);
+          res.json({user: newUser, profile: newUserProfile}).status(203);
           
         } catch (error) {
           res.json(error);
