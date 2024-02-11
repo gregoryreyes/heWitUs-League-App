@@ -4,6 +4,7 @@ import './loadEnv.js';
 import { conn } from './db/conn.js';
 import morgan from 'morgan';
 import usersRouter from './routes/users.js';
+import weatherRouter from './routes/weather.js';
 
 conn();
 
@@ -18,6 +19,7 @@ app.use( express.urlencoded( {extended: true} ) ) // Allow in URL string
 
 // Routes
 app.use( '/api/users', usersRouter );
+app.use( '/api/street-ball-weather-conditions', weatherRouter );
 
 app.get( '/', (req, res) => {
   res.send('The heWitUs Backend');

@@ -140,8 +140,6 @@ router
    */
   .post( '/signup', async (req, res) => {
 
-    console.log( 'req.body --> ', req.body );
-
     try {
       // check email is not in db
       const isEmailTaken = await User.findOne( { email: req.body.email } );
