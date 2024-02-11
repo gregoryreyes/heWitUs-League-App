@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import User from '../models/users.js';
 
 const router = new Router();
-const saltRounds = process.env.SALT_ROUNDS;
+const saltRounds = Number( process.env.SALT_ROUNDS );
 
 router
 /**
@@ -12,7 +12,6 @@ router
  */
   .get( '/', async (req, res) => {
     const getAllUsers = await User.find({});
-    console.log( 'getAllUsers --> ', getAllUsers );
     try {
       res.json( getAllUsers );
     } catch (error) {
@@ -62,11 +61,51 @@ router
       res.json( {msg: "User deleted", deleteUser } );
     } catch (error) {
       console.log(error);
+      res.json(error).status(400);
+    }
+  })
+  /**
+   * PUT /:id/update-password
+   * @param: client needs to send body;
+   * {
+   *  currentPassword: "my old password"
+   *  newPassword: "my new password"
+   * }
+   * 
+   * We can use NodeMailer here to send emails before updating the password
+   */
+  .put( '/:id/update-password', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { currentPassword, newPassword } = req.body;
+
+      // Find the user to update
+      const user = await User.findById(id);
+      if ( !user ) return res.json( { msg: 'User not found!' } ).status(404);
+
+      // Verify old password with the password hash in db
+      const passwordMatched = await bcrypt.compare( currentPassword, user.password );
+      if (!passwordMatched ) {
+        return res.json( { msg: 'Authentication Error' } ).status(401);
+      }
+
+      console.log( 'password matched!' );
+
+      // Hash the new password
+      const hashedPassword = await bcrypt.hash( newPassword, saltRounds );
+
+      // Set the old password hash to the newPassword hash
+      await User.findByIdAndUpdate( id, { password: hashedPassword } );
+
+      res.json( { msg: 'User password updated!', user } );
+    } catch (error) {
+      console.log(error);
+      res.json(error).status(400);
     }
   })
   /**
    * POST /signin
-   * @description route to sign in to app
+   * @description Route for user authentication with email and password
    */
   .post( '/signin', async (req, res) => {
     let userFound = false;
@@ -80,11 +119,15 @@ router
       userFound = true;
 
       // check if password is a match
-      findUserByEmail.password === 'qwerty' ? passwordValidated = true : passwordValidated = false;
+      const passwordMatched = await bcrypt.compare( req.body.password, findUserByEmail.password );
+
+      console.log( 'passwordMatched --> ', passwordMatched );
+
+      passwordMatched ? passwordValidated = true : passwordValidated = false;
     }
 
     if ( userFound && passwordValidated ) {
-      console.log( 'found user and password was validate!' );
+      console.log( 'found user and password was validated!' );
       res.json(findUserByEmail).status(200);
     } else {
       res.json( {msg: 'User not found or was unable to authenticate'} ).status(204);
@@ -107,13 +150,15 @@ router
         try {
           // create a new user in db
           let newDocument = req.body;
-          let myDate = new Date();
-          newDocument.date_created = myDate.toString();
 
-          const user = await User.create(newDocument);
+          // Using the Mongoose timestamp instead of the two lines below
+          // let myDate = new Date();
+          // newDocument.date_created = myDate.toString();
+
+          const newUser = await User.create(newDocument);
 
           // send the new user
-          res.json(user);
+          res.json(newUser).status(203);
           
         } catch (error) {
           res.json(error);
