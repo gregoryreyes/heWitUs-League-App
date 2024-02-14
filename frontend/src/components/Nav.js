@@ -1,13 +1,18 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectUser, setUser } from '../features/isUserAuthSlice';
 
 export default function Nav() {
+  console.log( 'setUser --> ', setUser );
+  const user = useSelector( selectUser );
+  console.log( '45 user --> ', user );
   return(
     <nav>
       <div className="navWrap">
         
         <div className="navLogoWrap">
           <Link to="/">
-            <h1>heWitUs</h1>
+            <h1>heWitUs 🏀</h1>
           </Link>
         </div>
 
@@ -26,11 +31,23 @@ export default function Nav() {
         </div>
 
         <div className="navLoginSection">
-          <span className="login">
-            <Link to="/login">Login</Link>
-          </span> / <span className="signup">
-            <Link to="/signup">Sign Up</Link>
-          </span>
+          { user ? (
+            <>
+              <span>
+                <Link to="/profile">{ user.username }</Link>
+              </span> / <span>
+                <Link to="/">Log Out</Link>
+              </span>
+            </>
+            ) : (
+            <>
+            <span className="login">
+              <Link to="/login">Login</Link>
+            </span> / <span className="signup">
+              <Link to="/signup">Sign Up</Link>
+            </span>
+            </>
+          )}
         </div>
 
       </div>

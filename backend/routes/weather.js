@@ -6,7 +6,7 @@ const weatherUrl = process.env.OPEN_WEATHER_URL;
 router
   .get( '/', async (req, res) => {
     console.log( 'weather main page' );
-    res.json( { msg: 'weather main page' } );
+    res.json( { msg: 'weather main page' } ).status(200);
   })
   .get( '/:zip', async (req, res) => {
     const { zip } = req.params;
