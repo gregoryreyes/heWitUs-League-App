@@ -1,5 +1,9 @@
 export default function Contact() {
   return(
-    <h1>Contact Page</h1>
+    <div className='hwuDivContentWrap'>
+      <div className='hwuDivContent'>
+        <h1>Contact Page</h1>
+      </div>
+    </div>
   )
 }

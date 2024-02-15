@@ -1,5 +1,9 @@
 export default function About() {
   return(
-    <h1>About Page</h1>
+    <div className='hwuDivContentWrap'>
+      <div className='hwuDivContent'>
+        <h1>About Page</h1>
+      </div>
+    </div>
   )
 }
