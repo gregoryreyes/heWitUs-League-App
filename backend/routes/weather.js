@@ -15,21 +15,21 @@ router
       const getWeather = (await fetch( weatherUrl + zip )).json()
         .then( data => {
           console.log( 'data --> ', data );
-          const temp = data.main.temp;
-          const feelsLike = data.main.feels_like;
-          const city = data.name;
-          const country = data.sys.country;
-          const weatherDescription = data.weather[0].main;
+          // const temp = data.main.temp;
+          // const feelsLike = data.main.feels_like;
+          // const city = data.name;
+          // const country = data.sys.country;
+          // const weatherDescription = data.weather[0].main;
 
-          const weatherInfo = {
-            temperature: temp,
-            feels_like: feelsLike,
-            city: city,
-            country: country,
-            weather_description: weatherDescription
-          }
+          // const weatherInfo = {
+          //   temperature: temp,
+          //   feels_like: feelsLike,
+          //   city: city,
+          //   country: country,
+          //   weather_description: weatherDescription
+          // }
 
-          res.json( weatherInfo ).status(200);
+          res.json( data ).status(200);
         })
     } catch (error) {
       res.json(error);

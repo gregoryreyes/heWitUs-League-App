@@ -12,6 +12,39 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  .hwuSubmitButton {
+    background-color: #df7f03;
+    border: none;
+    color: white;
+    padding: 0.5em;
+    text-align: center;
+    text-decoration: none;
+    /* display: inline-block; */
+    font-size: 16px;
+    margin-bottom: 2em;
+    cursor: pointer;
+    width: 53%;
+    /* text-transform: uppercase; */
+    font-weight: bold;
+  }
+  
+  .hwuSubmitButton:hover {
+    background-color: #af6910;
+  }
+
+  .textOverlay .hwuSubmitButton {
+    width: 10em;
+    text-transform: uppercase;
+  }
+}
+
+.hwuMainContentTextWrap {
+  width:50%;
+  margin: auto;
+  text-align: left;
+  margin-bottom: 2em;
+  line-height: 1.8em;
 }
 
 footer {
@@ -21,26 +54,6 @@ footer {
   color:#fff;
   padding: 1em 0;
   font-size: calc(10px + 1.5vmin);
-}
-
-.hwuSubmitButton {
-  background-color: #df7f03;
-  border: none;
-  color: white;
-  padding: 0.5em;
-  text-align: center;
-  text-decoration: none;
-  /* display: inline-block; */
-  font-size: 16px;
-  margin-bottom: 2em;
-  cursor: pointer;
-  width: 53%;
-  /* text-transform: uppercase; */
-  font-weight: bold;
-}
-
-.hwuSubmitButton:hover {
-  background-color: #af6910;
 }
 
 /* .App-logo {
@@ -157,6 +170,54 @@ footer {
 
 .hwuMainContentWrap {
   display: flex;
+  margin: 0 2em;
+}
+
+#hwuBackgroundVideo {
+  filter: brightness(0.5);
+  object-fit: cover;
+  height: 88vh;
+  position: relative;
+  z-index: -99;
+  width: 100%;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.textOverlay {
+  position: absolute;
+  left: 0;
+  top: 68%;
+  transform: translateY(-50%);
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  font-size: 3rem;
+  opacity: 0.8;
+}
+
+.hwuTosPageWrap {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 20em;
+  line-height: 2.5em;
+}
+
+.hwuMainContent {
+  margin: 2em auto 0;
+  /* margin: auto; */
+  text-align: center;
+}
+
+.hwuMainContent .hwuSubmitButton {
+  width: 16em;
+  text-transform: uppercase;
 }
 
 /* .App-link {
@@ -171,3 +232,50 @@ footer {
     transform: rotate(360deg);
   }
 } */
+
+.hwuDivContentWrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+
+  .hwuDivContent {
+    margin: 0 2em;
+  }
+}
+
+.hwuFooterContent {
+  display: flex;
+  justify-content: space-around;
+  margin: 0  2em;
+  text-align: center;
+
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+}
+
+.hwuSubmitButton {
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+}
+
+.weatherDiv {
+  text-align: center;
+  margin-top: 2em;
+
+  .hwuSubmitButton {
+    width: 466px;
+  }
+
+  .weatherInput {
+    width: 462px
+  }
+}
+
+.hwuProfileWrap {
+  margin-top: 2em;
+}

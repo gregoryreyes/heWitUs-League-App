@@ -8,17 +8,17 @@ export const isUserAuthSlice = createSlice({
     }
   },
   reducers: {
-    loginStatus: ( state, action ) => {
-      state.value = action.payload;
-    },
     setUser: ( state, action ) => {
       state.value.user = action.payload
+    },
+    reset: ( state ) => {
+      state.value.user = null
     }
   }
 });
 
 // Actions
-export const { loginStatus, setUser } = isUserAuthSlice.actions;
+export const { setUser, reset } = isUserAuthSlice.actions;
 
 // State selectors
 export const selectUser = ( state ) => state.IsAuth.value.user;

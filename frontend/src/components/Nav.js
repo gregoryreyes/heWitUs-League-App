@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUser, setUser } from '../features/isUserAuthSlice';
+import { selectUser, setUser, reset, selectReset } from '../features/isUserAuthSlice';
 
 export default function Nav() {
-  console.log( 'setUser --> ', setUser );
   const user = useSelector( selectUser );
+  const dispatch = useDispatch();
   console.log( '45 user --> ', user );
   return(
     <nav>
@@ -36,7 +36,7 @@ export default function Nav() {
               <span>
                 <Link to="/profile">{ user.username }</Link>
               </span> / <span>
-                <Link to="/">Log Out</Link>
+                <Link onClick={ () => dispatch( reset() ) } to="/">Log Out</Link>
               </span>
             </>
             ) : (

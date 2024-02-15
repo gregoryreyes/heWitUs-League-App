@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import { Routes, Route } from 'react-dom';
 import { Route, Routes } from "react-router-dom";
 import Nav from './components/Nav';
 import Footer from './components/Footer';
@@ -10,11 +9,13 @@ import Leagues from './components/Leagues';
 import Contact from './components/Contact';
 import Main from './components/Main';
 import Profile from './components/Profile';
+import Tos from './components/Tos';
+import StreetBallWeather from './components/StreetBallWeather';
 import './App.css';
 
 function App() {
 
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
   useEffect( () => {
     // Connect to the backend
@@ -26,7 +27,7 @@ function App() {
       // const data = await res.json();
 
       // Set data to the state users variable
-      setUsers(users);
+      // setUsers(users);
     }
 
     fetchData();
@@ -48,7 +49,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/leagues" element={<Leagues />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/profile" element={<Profile users={users} />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/tos" element={<Tos />} />
+          <Route path="/street-ball-weather" element={<StreetBallWeather />} />
         </Routes>
       </main>
         <footer className="hwuRow hwuFooter">
