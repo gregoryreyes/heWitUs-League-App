@@ -45,6 +45,11 @@ export default function Profile() {
           <h3>Profile</h3>
           <p><strong>Username:</strong> {userInfo.username}</p>
           <p><strong>email:</strong> {userInfo.user_email}</p>
+          <div>
+            <button className='hwuSubmitButton' type='submit'>
+              Edit Profile
+            </button>
+          </div>
         </div>
       </div>
     );

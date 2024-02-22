@@ -20,14 +20,20 @@ function App() {
   useEffect( () => {
     // Connect to the backend
     const fetchData = async () => {
-      const res = await fetch('http://localhost:4523/api/users');
-      // console.log( 'res.json() --> ', await res.json() );
-      const users = await res.json();
-      console.log( 'users ----> ', users );
-      // const data = await res.json();
 
-      // Set data to the state users variable
-      // setUsers(users);
+      try {
+        const res = await fetch('http://localhost:4523/api/users');
+        // console.log( 'res.json() --> ', await res.json() );
+        const users = await res.json();
+        console.log( 'users ----> ', users );
+        // const data = await res.json();
+
+        // Set data to the state users variable
+        // setUsers(users);
+      } catch (error) {
+        console.log(error);
+      }
+      
     }
 
     fetchData();

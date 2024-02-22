@@ -27,6 +27,7 @@ export default function Login() {
       console.log( error );
     }
   }
+
   return(
     <div className="loginSection">
 
@@ -53,6 +54,8 @@ export default function Login() {
                     onChange={ (e) => setEmail(e.target.value)}
                     required
                   />
+
+                  <br />
 
                   <input
                     id='signupPassword'
