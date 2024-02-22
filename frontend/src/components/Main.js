@@ -30,7 +30,7 @@ export default function Main() {
           <div className='hwuMainContent'>
             <div className='hwuMainContentTextWrap'>
               <p>
-                HeWitUs is a league/tournament app that allows players to keep track of their season's scheduled games, view their standings, communicate with their teammates, coach, and commissioner, view team and individual stats, view leader boards, scouting reports, etc...
+                HeWitUs is a league/tournament app that allows players to keep track of their season's scheduled games, view their team's standings, communicate with teammates, coach, and the commissioner of their league, view team and individual stats, view leader boards, scouting reports, etc...
               </p>
             </div>
               <button className='hwuSubmitButton'>

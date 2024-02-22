@@ -2,8 +2,12 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { selectUser, setUser } from '../features/isUserAuthSlice';
+
 export default function Signup() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -23,8 +27,11 @@ export default function Signup() {
         lname,
         phone,  
       });
-      console.log( 'signup page res.data --> ', res.data );
-      setUsername(res.data);
+      console.log( '111 signup page res.data --> ', res.data );
+      console.log( '222 signup page res.data.profile.fname --> ', res.data.profile.fname );
+      setUsername(res.data.profile.fname);
+
+      dispatch( setUser(res.data.user) );
 
       navigate('/');
 
@@ -58,6 +65,7 @@ export default function Signup() {
                     onChange={ (e) => setUsername(e.target.value)}
                     required
                   />
+                  <br />
 
                   <input
                     id='signupEmail'
@@ -71,6 +79,8 @@ export default function Signup() {
                     required
                   />
 
+                  <br />
+
                   <input
                     id='signupPassword'
                     className='signupInput'
@@ -82,6 +92,8 @@ export default function Signup() {
                     onChange={ (e) => setPassword(e.target.value)}
                     required
                   />
+
+                  <br />
 
                   <input
                     id='signupFname'
@@ -95,6 +107,8 @@ export default function Signup() {
                     required
                   />
 
+                  <br />
+
                   <input
                     id='signupLname'
                     className='signupInput'
@@ -106,6 +120,8 @@ export default function Signup() {
                     onChange={ (e) => setLname(e.target.value)}
                     required
                   />
+
+                  <br />
 
                   <input
                     id='signupPhone'

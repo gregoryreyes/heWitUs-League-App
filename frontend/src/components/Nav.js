@@ -5,6 +5,7 @@ import { selectUser, setUser, reset, selectReset } from '../features/isUserAuthS
 export default function Nav() {
   const user = useSelector( selectUser );
   const dispatch = useDispatch();
+  // const reset = useSelector( selectReset );
   console.log( '45 user --> ', user );
   return(
     <nav>
