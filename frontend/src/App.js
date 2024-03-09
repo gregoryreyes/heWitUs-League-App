@@ -32,6 +32,7 @@ function App() {
         // setUsers(users);
       } catch (error) {
         console.log(error);
+        // TODO: If backup connection refused, notify user on screen.
       }
       
     }

@@ -48,13 +48,8 @@ body {
   line-height: 1.8em;
 }
 
-footer {
-  margin-top: 100px;
-  margin-top: auto;
-  background-color: #282c34;
-  color:#fff;
-  padding: 1em 0;
-  font-size: calc(10px + 1.5vmin);
+.hwu-mfdoom {
+  text-transform: uppercase;
 }
 
 /* .App-logo {
@@ -75,7 +70,7 @@ footer {
   /* flex-direction: column; */
   /* align-items: center; */
   /* justify-content: center; */
-  font-size: calc(10px + 1.5vmin);
+  font-size: calc(10px + 1vmin);
   color: white;
   padding: 1em 0;
 
@@ -99,6 +94,8 @@ footer {
       margin: 0 1.7em;
 
       .navLogoWrap {
+        white-space: nowrap;
+
         h1, ul {
           display: inline-block;
         }
@@ -245,16 +242,36 @@ footer {
   }
 }
 
+footer {
+  margin-top: 100px;
+  margin-top: auto;
+  background-color: #282c34;
+  color:#fff;
+  /* padding: 1em 0; */
+  font-size: calc(10px + 1vmin);
+
+  .hwuFooterBottomWrap {
+    background-color: #df7f03;
+  }
+}
+
 .hwuFooterContent {
   display: flex;
   justify-content: space-around;
-  margin: 0  2em;
+  /* margin: 0  2em; */
+  margin: 1em 0;
   text-align: center;
 
   a {
     text-decoration: none;
     color: #fff;
   }
+}
+
+.hwuFooterBottomWrap {
+  text-align: center;
+  padding: 0.5em;
+  font-size: 0.8em;
 }
 
 .hwuSubmitButton {

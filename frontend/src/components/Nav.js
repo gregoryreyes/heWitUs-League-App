@@ -17,7 +17,7 @@ export default function Nav() {
           </Link>
         </div>
 
-        <div className="navContentSection">
+        <div className="navContentSection hwu-mfdoom">
           <ul>
             <li>
               <Link to="/about">About</Link>
@@ -31,7 +31,7 @@ export default function Nav() {
           </ul>
         </div>
 
-        <div className="navLoginSection">
+        <div className="navLoginSection hwu-mfdoom">
           { user ? (
             <>
               <span>

@@ -20,7 +20,7 @@ export default function Main() {
 
       <div className='textOverlay'>
         <h6>A Basketball League App</h6>
-        <h3>FOR THE CULTURE </h3>
+        <h3>FOR THE CULTURE</h3>
         <button  className='hwuSubmitButton' onClick={ routeChange }>
           Join Now
         </button>
